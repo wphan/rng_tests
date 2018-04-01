@@ -8,7 +8,9 @@ def monobit(bit_string):
     """
     http://qrng.b-phot.org/static/media/NistTestsLongDescription.pdf
 
-    :param bit_string: string of bits 
+    p-value >= 0.01 considered random
+
+    :param bit_string: string of bits
     :return p-value: result of monobit test
     """
     count = 0
