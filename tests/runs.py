@@ -2,7 +2,7 @@ import random
 import math
 
 from scipy.special import erfc
-from frequency_monobit import monobit
+from tests.frequency_monobit import monobit
 
 
 def runs(bit_string):
