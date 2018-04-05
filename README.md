@@ -5,9 +5,9 @@ We ran the tests by executing ```run_all_tests.py``` in the top level directory.
 | OS            | P-score       | Duration (seconds)  |
 | ------------- |---------------| -----|
 | **Cumulative Sum**
-| Linux (WSL)    | 0.0 |58.79|
-| Linux (Ubuntu) | 0.0 |58.56|
-| Windows        | 0.0 |59.46|
+| Linux (WSL)    | 0.01 |58.79|
+| Linux (Ubuntu) | 0.01 |58.56|
+| Windows        | 0.01 |59.46|
 | **Frequency Monobit**
 | Linux (WSL)    | 0.64 |20.42|
 | Linux (Ubuntu) | 0.17 |20.19|
@@ -29,7 +29,7 @@ We ran the tests by executing ```run_all_tests.py``` in the top level directory.
 ### Randomness conditions:
 | Test            | Condition
 | ------------- |---------------|
-| Cumulative Sum | p-score approaches 0 as randomness increases |
+| Cumulative Sum | random if p-score >= 0.01 |
 | Frequency Monobit | random if p-score >= 0.01 |
 | Random Excursions | random if all 8 p-scores >= 0.01 |
 | Runs | random if p-score >= 0.01 |

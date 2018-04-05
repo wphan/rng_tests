@@ -1,8 +1,12 @@
-import random
 import numpy as np
 
-from scipy.special import erfc
+import math
 from scipy.stats import norm
+from scipy.stats import t
+
+
+def sncpdf(x):
+    return (1.0 + math.erf(x / math.sqrt(2.0))) / 2.0
 
 
 def cumsum(bit_string, forward=True):
@@ -38,8 +42,8 @@ def cumsum(bit_string, forward=True):
     end = int(np.floor(0.25 * np.floor(n / abs_max) - 1))
     first_terms = []
     for i in range(start, end + 1):
-        left = norm.cdf((4 * i + 1) * abs_max / np.sqrt(abs_max))
-        right = norm.cdf((4 * i - 1) * abs_max / np.sqrt(abs_max))
+        left = t.cdf((4 * i + 1) * abs_max / np.sqrt(abs_max), 1)
+        right = t.cdf((4 * i - 1) * abs_max / np.sqrt(abs_max), 1)
         first_terms.append(left - right)
 
     # calculate the terms in the second summation
@@ -47,8 +51,8 @@ def cumsum(bit_string, forward=True):
     end = int(np.floor(0.25 * np.floor(n / abs_max) - 1))
     second_terms = []
     for i in range(start, end + 1):
-        left = norm.cdf((4 * i + 3) * abs_max / np.sqrt(abs_max))
-        right = norm.cdf((4 * i + 1) * abs_max / np.sqrt(abs_max))
+        left = t.cdf((4 * i + 3) * abs_max / np.sqrt(abs_max), 1)
+        right = t.cdf((4 * i + 1) * abs_max / np.sqrt(abs_max), 1)
         second_terms.append(left - right)
 
     return 1.0 - np.sum(np.array(first_terms)) + np.sum(np.array(second_terms))
@@ -65,5 +69,5 @@ if __name__ == "__main__":
     print("input: 0, output: {}".format(cumsum(test_zeroes)))
 
     # test with random number
-    test_random = format(random.getrandbits(1024), '0b')
-    print("input: random 1024-bit number, output: {}".format(cumsum(test_random)))
+    test_random = "1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000"
+    print("input: random number, output: {}".format(cumsum(test_random)))
